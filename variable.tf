@@ -23,3 +23,17 @@ variable "aws_secret_access_key" {
   type        = string
   sensitive   = true  # Mark as sensitive so it's not displayed in the logs
 }
+
+variable "cidr_vpc" {
+  description = "CIDR Block value"
+  default = "10.0.0.0/16"
+}
+
+variable "cidr_subnet" {
+  description = "CIDR Block value"
+  default = "10.0.1.0/24"
+}
+
+variable "availability_zone" {
+  default = "us-east-1a"
+}
