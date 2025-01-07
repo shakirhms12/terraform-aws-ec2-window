@@ -37,3 +37,11 @@ variable "cidr_subnet" {
 variable "availability_zone" {
   default = "us-east-1a"
 }
+
+variable "install_software" {
+  default = "IIS"
+}
+
+variable "vm_name" {
+  default = "MyWindowsServer"
+}
