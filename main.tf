@@ -13,7 +13,31 @@ resource "aws_instance" "windows" {
   vpc_security_group_ids = [aws_security_group.security_group.id]
   key_name = "my_aws_key"
 
+   # Upload PowerShell script
+  provisioner "file" {
+    source      = templatefile("${path.module}/windows-setup.ps1.tpl", {
+      vm_name         = var.vm_name
+      install_software = var.install_software
+    })
+    destination = "C:\\setup\\windows-setup.ps1"
 
+     connection {
+      type     = "winrm"
+      host     = aws_instance.windows_ec2.public_ip
+      user     = "Administrator"
+      password = var.password  # Use a secure method to retrieve this password
+      https    = false
+      insecure = true
+      port     = 5985
+    }
+  }
+
+  # Execute PowerShell script
+  provisioner "remote-exec" {
+    inline = [
+      "powershell.exe -ExecutionPolicy Bypass -File C:\\setup\\windows-setup.ps1"
+    ]
+  }
   # Add tags to the instance
   tags = {
     Name        =  "windows"                               # "webserver-${terraform.workspace}"

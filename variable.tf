@@ -45,3 +45,8 @@ variable "install_software" {
 variable "vm_name" {
   default = "MyWindowsServer"
 }
+
+variable "password" {
+  default = "Xp3eqiPmBj%G$VCTDPNLu6Ki)DFPfg7q"
+  sensitive = true
+}
