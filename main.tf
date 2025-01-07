@@ -44,4 +44,16 @@ resource "aws_instance" "windows" {
     # Environment = 
     # Branch      = terraform.workspace
   }
+
+    lifecycle {
+    ignore_changes = [
+      tags,
+      vpc_security_group_ids,
+      security_groups, 
+      user_data, user_data_base64,
+      root_block_device,
+      iam_instance_profile
+    ]
+  }
+  
 }
