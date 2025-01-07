@@ -23,7 +23,7 @@ resource "aws_instance" "windows" {
 
      connection {
       type     = "winrm"
-      host     = aws_instance.windows_ec2.public_ip
+      host     = aws_instance.windows.public_ip
       user     = "Administrator"
       password = var.password  # Use a secure method to retrieve this password
       https    = false
