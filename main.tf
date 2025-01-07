@@ -13,21 +13,6 @@ resource "aws_instance" "windows" {
   vpc_security_group_ids = [aws_security_group.security_group.id]
   key_name = "my_aws_key"
 
- # Upload PowerShell script
-  provisioner "file" {
-    source      = templatefile("${path.module}/windows-setup.ps1.tpl", {
-      vm_name         = var.vm_name
-      install_software = var.install_software
-    })
-    destination = "C:\\setup\\windows-setup.ps1"
-  }
-
-  # Execute PowerShell script
-  provisioner "remote-exec" {
-    inline = [
-      "powershell.exe -ExecutionPolicy Bypass -File C:\\setup\\windows-setup.ps1"
-    ]
-  }
 
   # Add tags to the instance
   tags = {
