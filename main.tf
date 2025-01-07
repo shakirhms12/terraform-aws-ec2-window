@@ -20,13 +20,20 @@ resource "aws_instance" "windows" {
   }
 
     lifecycle {
+    prevent_destroy       = true
     ignore_changes = [
       tags,
       vpc_security_group_ids,
       security_groups, 
       user_data, user_data_base64,
       root_block_device,
-      iam_instance_profile
+      iam_instance_profile,
+      public_ip,
+      public_dns,
+      private_ip,
+      private_dns,
+      tags,
+      tags_all
     ]
   }
 
